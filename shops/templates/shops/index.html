@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>shops</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  </head>
+  <body class="indexbody">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url "shops:home" %}">Shops</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url "shops:home" %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main role="main" class="container" >
+  <div class="row">
+    <div class="col-md-10 indexmain">
+
+      {% block content %}
+      {% for shop in shops %}
+      <div class="row">
+        <div class="col-md-7">
+          <a href="{% url 'shops:detail' pk=shop.pk %}"><h3><p>{{ shop.name }}</p></h3></a>
+          <i>category : {{ shop.category }}</i>
+          <p>{{ shop.address }}</p>
+          <p>opening and closing time(week days): {{shop.open_time_week}} {{shop.am_pm_ow}} - {{shop.close_time_week}} {{shop.am_pm_cw}}</p>
+          <p>opening and closing time(weekend days): {{shop.open_time_end}} {{shop.am_pm_oe}} - {{shop.close_time_end}} {{shop.am_pm_ce}}</p>
+        </div>
+        <div class="col-md-5">
+          <iframe width="300"
+                height="300"
+                frameborder="0"
+                style="border:0"
+                src="https://www.google.com/maps/embed/v1/view?center={{ shop.latitude }},{{ shop.longitude }}&zoom=16&key=API_KEY"
+                allowfullscreen></iframe>
+        </div>
+      </div><br><hr>
+        {% endfor %}
+      {% endblock %}
+  </body>
+</html>

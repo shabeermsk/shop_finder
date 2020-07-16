@@ -1,0 +1,18 @@
+{% extends 'shops/index.html' %}
+
+{% block content %}
+
+<iframe width="640"
+      height="480"
+      frameborder="0"
+      style="border:0"
+      src="https://www.google.com/maps/embed/v1/view?center={{ shop.latitude }},{{ shop.longitude }}&zoom=15&key=API_KEY"
+      allowfullscreen></iframe>
+<br>
+<h3><p>{{ shop.name }}</p></h3>
+<i>category : {{ shop.category }}</i>
+<p>{{ shop.address }}</p>
+<p>opening and closing time(week days): {{shop.open_time_week}} {{shop.am_pm_ow}} - {{shop.close_time_week}} {{shop.am_pm_cw}}</p>
+<p>opening and closing time(weekend days): {{shop.open_time_end}} {{shop.am_pm_oe}} - {{shop.close_time_end}} {{shop.am_pm_ce}}</p>
+
+{% endblock %}
